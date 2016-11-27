@@ -15,6 +15,11 @@
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.0",
     "method-override": "~1.0.0",
-    "express-session": "~1.0.0"     
+    "express-session": "~1.0.0",
+    "angular": "latest",
+    "angular-route": "latest",
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest"
   }
 }

@@ -3,25 +3,164 @@
 <html>
 <head>
     <title>Ampere Health App</title>
+    <link href="css/lightbox.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 </head>
 <body>
-<div class="container">
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-heart"></span> Ampere Health</h1>
+  <header id="home">
+    <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="item active" style="background-image: url(images/slider/2.jpg)">
+          <div class="caption">
+            <h1 class="animated fadeInLeftBig">Welcome to Ampere <span>Health App</span></h1>
+            <p class="animated fadeInRightBig">Healthy Eating - Food Suggestion - Fitbit Data - Calories Suggestion</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="/signup">Start now</a>
+          </div>
+        </div>
+        <div class="item" style="background-image: url(images/slider/5.jpg)">
+          <div class="caption">
+            <h1 class="animated fadeInLeftBig">Get Suggestion for <span>healthy Food</span></h1>
+            <p class="animated fadeInRightBig">Healthy Eating - Food Suggestion - Fitbit Data - Calories Suggestion</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="/signup">Start now</a>
+          </div>
+        </div>
+        <div class="item" style="background-image: url(images/slider/4.jpg)">
+          <div class="caption">
+            <h1 class="animated fadeInLeftBig">Calories Management <span>- Right Way</span></h1>
+            <p class="animated fadeInRightBig">Healthy Eating - Food Suggestion - Fitbit Data - Calories Suggestion</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="/signup">Start now</a>
+          </div>
+        </div>
+      </div>
+      <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
 
-        <p>Login or Register with:</p>
+      <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
-        <a href="/auth/fitbit" class="btn btn-default"><span class="fa fa-user"></span> Login with Fitbit</a>
+    </div><!--/#home-slider-->
+    <div class="main-nav">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>                   
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">                 
+            <li class="scroll active"><a href="#home">Home</a></li>
+            <li class="scroll"><a href="#services">Service</a></li>                    
+            <li class="scroll"><a href="/signup">Sign Up</a></li>
+            <li class="scroll"><a href="/login">Login</a></li>       
+          </ul>
+        </div>
+      </div>
+    </div><!--/#main-nav-->
+  </header><!--/#home-->
+  <section id="services">
+    <div class="container">
+      <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <div class="row">
+          <div class="text-center col-sm-8 col-sm-offset-2">
+            <h2>Our Services</h2>
+            <p>We Provide Incident Reporting Servcies. We provide reporting through Automated sensors as well as manual reporting. No whatter How you report, Help is always on the way!!</p>
+          </div>
+        </div> 
+      </div>
+      <div class="text-center our-services">
+        <div class="row">
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="service-icon">
+              <i class="fa fa-car"></i>
+            </div>
+            <div class="service-info">
+              <h3>Car Crash Incident Reporting</h3>
+              <p>Our car sensors will report the incident to concerned authority. Alternatively, Any by stander also report an incident by filling a simple form</p>
+            </div>
+          </div>
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="450ms">
+            <div class="service-icon">
+              <i class="fa fa-ambulance"></i>
+            </div>
+            <div class="service-info">
+              <h3>Immidiete Action</h3>
+              <p>After getting Incident report from Sensors, Rescue team will respond immidietely/p>
+            </div>
+          </div>
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="550ms">
+            <div class="service-icon">
+              <i class="fa fa-cloud"></i>
+            </div>
+            <div class="service-info">
+              <h3>Sensor Network</h3>
+              <p>We provide world class AWS cloud based sensor network management. Providers can add/delete and monitor the network in few clicks</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section><!--/#services-->
 
-</div>
+  <section id="features" class="parallax">
+    <div class="container">
+      <div class="row count">
+        <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+          <i class="fa fa-camera"></i>
+          <h3 class="timer">20</h3>
+          <p>Restaurents</p>
+        </div>
+        <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+          <i class="fa fa-user"></i>
+          <h3 class="timer">200</h3>                    
+          <p>Restaurent Menu</p>
+        </div> 
+        <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
+          <i class="fa fa-list"></i>
+          <h3 class="timer">5</h3>                    
+          <p>Cuisine</p>
+        </div> 
+        <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
+          <i class="fa fa-comment-o"></i>                    
+          <h3>24/7</h3>
+          <p>Fast Support</p>
+        </div>                 
+      </div>
+    </div>
+  </section><!--/#features-->
+
+  <section id="contact">
+    <div id="google-map" class="wow fadeIn" data-latitude="37.3912" data-longitude="-121.9821" data-wow-duration="1000ms" data-wow-delay="400ms"></div>      
+  </section><!--/#contact-->
+  <footer id="footer">
+    <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+      <center><p>Ampere Health App</p></center>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+  <script type="text/javascript" src="js/wow.min.js"></script>
+  <script type="text/javascript" src="js/mousescroll.js"></script>
+  <script type="text/javascript" src="js/smoothscroll.js"></script>
+  <script type="text/javascript" src="js/jquery.countTo.js"></script>
+  <script type="text/javascript" src="js/lightbox.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
 </body>
 </html>
