@@ -1,3 +1,4 @@
+// Module for Restaurent Menu
 module.exports =function(app, menu) {
 
     var Models = require('../app/model/restaurent.js');

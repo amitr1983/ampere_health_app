@@ -10,7 +10,6 @@
     "passport-local" : "latest",    
     "connect-flash" : "~0.1.1",     
     "bcrypt-nodejs" : "latest",
-
     "morgan": "~1.0.0",
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.0",
@@ -20,6 +19,7 @@
     "angular-route": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
-    "animate.css": "latest"
+    "animate.css": "latest",
+    "request": "latest"
   }
 }

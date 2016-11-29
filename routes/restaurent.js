@@ -1,3 +1,4 @@
+// Module for Restaurent data
 module.exports =function(app, restaurent) {
 
     var Model = require('../app/model/restaurent.js');

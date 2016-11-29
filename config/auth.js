@@ -1,6 +1,6 @@
 // config/auth.js
 
-// expose our config directly to our application using module.exports
+// Update Fitbit Settings here
 module.exports = {
 
     'fitbitAuth' : {
