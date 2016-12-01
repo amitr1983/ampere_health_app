@@ -27,7 +27,7 @@ var restaurentSchema = mongoose.Schema({
 var menuSchema = mongoose.Schema({
 
     menu        : {
-        restaurent   : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Restaurent' }],
+        restaurant   : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Restaurent' }],
         item         : String,
         calories     : Number,
         veg          : Boolean
@@ -36,6 +36,13 @@ var menuSchema = mongoose.Schema({
 
 });
 
+var calorieSchema = mongoose.Schema({
+
+    calorie        : {
+        max_calories         : Number
+    }
+
+});
 // methods ======================
 
 
@@ -44,10 +51,13 @@ var menuSchema = mongoose.Schema({
 var Cuisine = mongoose.model('Cuisine', cuisineSchema);
 var Restaurent = mongoose.model('Restaurent', restaurentSchema);
 var Menu = mongoose.model('Menu', menuSchema);
+var Calorie = mongoose.model('Calorie', calorieSchema);
 
 module.exports = {
     Restaurent: Restaurent,
     Menu: Menu,
-    Cuisine: Cuisine
+    Cuisine: Cuisine,
+    Calorie,Calorie
 };
+
 console.log("Created Restuarent model");
