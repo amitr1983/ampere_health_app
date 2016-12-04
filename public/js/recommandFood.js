@@ -26,4 +26,5 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.restaurant + "</td>"));
     row.append($("<td>" + rowData.items + "</td>"));
     row.append($("<td>" + rowData.calories + "</td>"));
+    row.append($("<td>" + '<a href=url class="editor_remove">Add Favorite</a>' + "</td>"));
 }
