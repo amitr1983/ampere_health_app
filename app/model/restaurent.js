@@ -57,7 +57,7 @@ module.exports = {
     Restaurent: Restaurent,
     Menu: Menu,
     Cuisine: Cuisine,
-    Calorie,Calorie
+    Calorie,Calorie,
 };
 
 console.log("Created Restuarent model");

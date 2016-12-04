@@ -1,5 +1,6 @@
 module.exports = function(app, passport) {
 
+    var Model = require('../app/model/restaurent.js');
 
     // Home Page ========
 
@@ -14,6 +15,13 @@ module.exports = function(app, passport) {
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
 
+    app.get('/recommandation', isLoggedIn, function(req, res) {
+        res.render('recommandation.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });
+
+
 
     // Signup form
     app.get('/signup', function(req, res) {
@@ -23,7 +31,13 @@ module.exports = function(app, passport) {
     // profile page
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
+        res.render('my_profile.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });
+
+    app.get('/dashboard', isLoggedIn, function(req, res) {
+        res.render('dashboard.ejs', {
             user : req.user // get the user out of session and pass to template
         });
     });
@@ -55,7 +69,7 @@ module.exports = function(app, passport) {
 
     // Call back redirect for Fitbit authorization
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', { 
-        successRedirect: '/profile',
+        successRedirect: '/dashboard',
         failureRedirect: '/login'
     }));
 

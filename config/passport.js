@@ -4,6 +4,8 @@ var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('../app/model/user');
 var FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
 var configAuth = require('./auth');
+var request = require('request');
+var Model = require('../app/model/restaurent.js');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -51,13 +53,6 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
-                // newUser.local.name        = profile.displayName;
-                // newUser.local.gender      = profile._json.user.gender;
-                // newUser.local.weight      = profile._json.user.weight;
-                // newUser.local.dateofbirth = profile._json.user.dateOfBirth;
-                // newUser.local.height      = profile._json.user.height;
-                // newUser.local.country = profile._json.user.country;
-                // newUser.local.age         = profile._json.user.age;
 
                 // save the user
                 newUser.save(function(err) {
@@ -133,7 +128,7 @@ module.exports = function(passport) {
                     newUser.fitbit.token       = accessToken;
                     newUser.fitbit.refreshtoken= refreshToken;
                     newUser.fitbit.name        = profile.displayName;
-                    newUser.fitbit.gender      = profile._json.user.gender;
+                    newUser.fitbit.gender      = "FEMALE";
                     newUser.fitbit.weight      = profile._json.user.weight;
                     newUser.fitbit.dateofbirth = profile._json.user.dateOfBirth;
                     newUser.fitbit.height      = profile._json.user.height;
@@ -141,6 +136,51 @@ module.exports = function(passport) {
                     newUser.fitbit.age         = profile._json.user.age;
 
                     console.log('Creating user account for ' + profile._json.user.weight);
+
+                    var calculated_calory_intake=0
+
+                    if (newUser.fitbit.gender == "MALE") {
+                        calculated_calory_intake =(66+ (13.75 * newUser.fitbit.weight) + (5.0*newUser.fitbit.height) - (6.75* newUser.fitbit.age))
+                    } else { 
+                        calculated_calory_intake =(655+ (9.6 * newUser.fitbit.weight) + (1.8*newUser.fitbit.height) - (4.7* newUser.fitbit.age))
+                    }
+                    console.log("BMR is "+calculated_calory_intake)
+
+                    Model.Calorie.create({           
+                        "max_calories": 2000
+                    });
+
+
+                    var date = new Date();
+                      date.setDate(date.getDate() - 1);
+                      var today = date.toISOString().slice(0,10);
+
+                      console.log(date)
+                      var options = {
+                      url: 'https://api.fitbit.com/1/user/-/activities/date/'+today+'.json',
+                      headers: {'Authorization': 'Bearer '+new Buffer(accessToken)
+                      }};
+
+                    function callback(error, response, body,done) {
+
+                      if (!error && response.statusCode == 200) {
+                        var info = JSON.parse(body);
+                        calories=info.summary.activityCalories
+                        steps=info.summary.steps
+                        goals=info.goals.caloriesOut
+
+                        User.update({'fitbit.id' : profile.id}, {$set: { 'fitbit.calories_burned' : calories }}, {upsert: true}, function(err){
+                            if (err) return console.log(err)
+                        });
+                        User.update({'fitbit.id' : profile.id}, {$set: { 'fitbit.steps' : steps }}, {upsert: true}, function(err){
+                            if (err) return console.log(err)
+                        });
+                        User.update({'fitbit.id' : profile.id}, {$set: { 'fitbit.goals' : goals }}, {upsert: true}, function(err){
+                            if (err) return console.log(err)
+                        });
+                      }}
+    
+    request(options, callback);
 
                     // save our user into the database
                     newUser.save(function(err) {

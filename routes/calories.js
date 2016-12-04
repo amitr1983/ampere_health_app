@@ -9,28 +9,12 @@ module.exports =function(app, calories) {
 
     var threshold_value = 2200;
     
-    User.find( {'fitbit.token' : /a/}, {'fitbit.token' : 1}, function(err, user) {
 
-      var date = new Date();
-      date.setUTCDate(15)
-      var today = date.toISOString().slice(0,10);
-      var accessToken = user[0].fitbit.token
-      var options = {
-      url: 'https://api.fitbit.com/1/user/-/activities/date/'+today+'.json',
-      headers: {'Authorization': 'Bearer '+new Buffer(accessToken)
-      }};
-
-    function callback(error, response, body,done) {
-
-      if (!error && response.statusCode == 200) {
-        var info = JSON.parse(body);
-        calories=info.summary.caloriesOut
-
-        res.send('Calories are '+calories)
-      }}
-    
-    request(options, callback);
-
-    });
-  });   
+    User.find({},{ _id:0}).lean().exec(function (err, user) {
+      if (err) return console.log(err)
+      console.log(user[0].fitbit.calories_burned)
+      calories_burned=user[0].fitbit.calories_burned
+      res.send("Calories burned is " + calories_burned)
+    });   
+  }); 
 }

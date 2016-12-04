@@ -20,7 +20,10 @@ var userSchema = mongoose.Schema({
         dateofbirth  : Date,
         height       : Number,
         age          : Number,
-        country      : String
+        country      : String,
+        calories_burned: Number,
+        steps        : Number,
+        goals        : Number
 
     }
 
