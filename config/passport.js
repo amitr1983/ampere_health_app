@@ -147,14 +147,14 @@ module.exports = function(passport) {
                     newUser.fitbit.token       = accessToken;
                     newUser.fitbit.refreshtoken= refreshToken;
                     newUser.fitbit.name        = profile.displayName;
-                    newUser.fitbit.gender      = profile.gender;
+                    newUser.fitbit.gender      = profile._json.user.gender;
                     newUser.fitbit.weight      = profile._json.user.weight;
                     newUser.fitbit.dateofbirth = profile._json.user.dateOfBirth;
                     newUser.fitbit.height      = profile._json.user.height;
                     newUser.fitbit.country = profile._json.user.country;
                     newUser.fitbit.age         = profile._json.user.age;
 
-                    console.log('Creating user account for ' + profile._json.user.weight);
+                    console.log('Creating user account for ' + profile._json.user);
 
                     var calculated_calory_intake=0
 

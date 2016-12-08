@@ -41,6 +41,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/dashboard', isLoggedIn, function(req, res) {
+        console.log(req.user)
         res.render('dashboard.ejs', {
             user : req.user // get the user out of session and pass to template
         });
@@ -90,26 +91,26 @@ module.exports = function(app, passport) {
     });
 
     app.get('/report', ensureLoggedIn, function(req, res, next) {
-        res.render('amit.ejs');
+        res.render('tableau.ejs');
     });
 
     app.get('/friend', isLoggedIn, function(req, res) {
 
-    var accessToken =JSON.stringify(req.user.token)
+        var accessToken =JSON.stringify(req.user.token)
     
-    var options = {
-    url: 'https://api.fitbit.com/1/user/-/friends.json',
-    headers: {'Authorization': 'Bearer '+accessToken 
-    }};
+        var options = {
+        url: 'https://api.fitbit.com/1/user/-/friends.json',
+        headers: {'Authorization': 'Bearer '+accessToken 
+        }};
 
-    function callback(error, response, body,done) {
-        if (!error && response.statusCode == 200) {
-        var info = JSON.parse(body);
-        // friends_list=info
-        console.log(info)
-        res.info
-    }}
-    request(options, callback);
+        function callback(error, response, body,done) {
+            if (!error && response.statusCode == 200) {
+            var info = JSON.parse(body);
+            // friends_list=info
+            console.log(info)
+            res.info
+        }}
+        request(options, callback);
 });
 
 

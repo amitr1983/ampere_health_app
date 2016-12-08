@@ -2,15 +2,28 @@
 <html>
 <head>
     <title>Ampere Health App</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
 </head>
 <body>
-<h1>Hello</h1><h1> <%= user %></h1>
-<h1> Welcome to One login</h1>
+	<div class="col-sm-6 col-sm-offset-3">
+	<h1>Hello <%= user.displayName %></h1>
+	<h3> Welcome to Ampere Health's One login</h3>
     <hr>
 
     <a href="/auth/fitbit" class="btn btn-primary"><span class="fa fa-user"></span> Login with Fitbit</a>
 
     <hr>
+
+    <hr>
+
+    <a href="/auth/fitbit" class="btn btn-primary"><span class="fa fa-user"></span> Logout </a>
+
+    <hr>
+    </div>
 
 </body>
 </html>
