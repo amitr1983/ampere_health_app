@@ -6,22 +6,41 @@ var FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
 var configAuth = require('./auth');
 var request = require('request');
 var Model = require('../app/model/restaurent.js');
+var Auth0Strategy = require('passport-auth0');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
-    // passport session setup 
+    passport.use('auth0', new Auth0Strategy({
+                domain:'ampere.auth0.com',
+                clientID:     'JEN6nvHWkmcDyXiGlm5UKdzNdnGKpp9L',
+                clientSecret: 'sPckte6Xscg0jkmCgKHZb6Ag3MlSPc4KiU7lkqsRsFONqsW4aSNnAWnJFoG5ZB65',
+                callbackURL:  'http://localhost:3000/auth/callback'
+      },
+      function(accessToken, refreshToken, extraParams, profile, done) {
+        return done(null, profile);
+      }
+    ));
 
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+      done(null, user);
     });
 
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(function(user, done) {
+      done(null, user);
     });
+    // passport session setup 
+
+    // passport.serializeUser(function(user, done) {
+    //     done(null, user.id);
+    // });
+
+    // // used to deserialize the user
+    // passport.deserializeUser(function(id, done) {
+    //     User.findById(id, function(err, user) {
+    //         done(err, user);
+    //     });
+    // });
 
     // Locan Sign up
     passport.use('local-signup', new LocalStrategy({

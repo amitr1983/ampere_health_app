@@ -20,6 +20,8 @@
     "bootstrap": "latest",
     "font-awesome": "latest",
     "animate.css": "latest",
-    "request": "latest"
+    "request": "latest",
+    "passport-auth0": "latest",
+    "connect-ensure-login": "latest"
   }
 }

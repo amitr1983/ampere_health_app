@@ -2,6 +2,10 @@ module.exports = function(app, passport) {
 
     var Model = require('../app/model/restaurent.js');
 
+    var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+
+    var request = require('request');
+
     // Home Page ========
 
     app.get('/', function(req, res) {
@@ -64,7 +68,7 @@ module.exports = function(app, passport) {
 
     //Authorization for Fitbit User
     app.get('/auth/fitbit',
-        passport.authenticate('fitbit', { scope: ['activity','heartrate', 'weight','location','profile'] }
+        passport.authenticate('fitbit', { scope: ['activity','heartrate', 'weight','location','profile', 'social'] }
     ));
 
     // Call back redirect for Fitbit authorization
@@ -72,6 +76,42 @@ module.exports = function(app, passport) {
         successRedirect: '/dashboard',
         failureRedirect: '/login'
     }));
+
+    app.get('/auth/callback',
+        passport.authenticate('auth0', { failureRedirect: '/login' }),
+        function(req, res) {
+        res.redirect(req.session.returnTo || '/user');
+    });
+
+    // Get the user profile
+    app.get('/user', ensureLoggedIn, function(req, res, next) {
+        console.log(req.user )
+        res.render('welcome.ejs', { user: req.user });
+    });
+
+    app.get('/report', ensureLoggedIn, function(req, res, next) {
+        res.render('amit.ejs');
+    });
+
+    app.get('/friend', isLoggedIn, function(req, res) {
+
+    var accessToken =JSON.stringify(req.user.token)
+    
+    var options = {
+    url: 'https://api.fitbit.com/1/user/-/friends.json',
+    headers: {'Authorization': 'Bearer '+accessToken 
+    }};
+
+    function callback(error, response, body,done) {
+        if (!error && response.statusCode == 200) {
+        var info = JSON.parse(body);
+        // friends_list=info
+        console.log(info)
+        res.info
+    }}
+    request(options, callback);
+});
+
 
 };
 

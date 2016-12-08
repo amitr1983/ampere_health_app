@@ -14,6 +14,8 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+var Auth0Strategy = require('passport-auth0');
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to db
