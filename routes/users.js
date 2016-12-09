@@ -96,7 +96,7 @@ module.exports = function(app, passport) {
 
     app.get('/friend', isLoggedIn, function(req, res) {
 
-        var accessToken =JSON.stringify(req.user.token)
+        var accessToken =req.user.fitbit.token
     
         var options = {
         url: 'https://api.fitbit.com/1/user/-/friends.json',
@@ -106,12 +106,20 @@ module.exports = function(app, passport) {
         function callback(error, response, body,done) {
             if (!error && response.statusCode == 200) {
             var info = JSON.parse(body);
-            // friends_list=info
-            console.log(info)
-            res.info
+    
+            f = info.friends
+            var f_list=[]
+            for (var i=0; i<f.length; i++){
+                f_list.push(f[i])
+             }
+             res.send(f_list)
         }}
         request(options, callback);
-});
+    });
+
+    app.get('/leaderboard', ensureLoggedIn, function(req, res, next) {
+        res.render('leaderboard.ejs');
+    });
 
 
 };
